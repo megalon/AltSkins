@@ -14,7 +14,7 @@ using Nick;
 
 namespace AltSkins
 {
-    [BepInPlugin("legoandmars-altskins", "AltSkins", "1.2.0")]
+    [BepInPlugin("legoandmars-altskins", "AltSkins", "1.5.0")]
     public class AltSkinsPlugin : BaseUnityPlugin
     {
         public static bool WaitingForUpdate = false;

@@ -19,23 +19,16 @@ namespace AltSkins
         public static void LoadSkins()
         {
             if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+            string[] files = Directory.GetFiles(folder, "*.nasbskin", SearchOption.AllDirectories);
 
-            foreach(var skinFolder in Directory.GetDirectories(folder))
+            foreach (var file in files)
             {
-                List<CustomSkin> skins = new List<CustomSkin>();
-                skins.Add(new CustomSkin(""));
+                CustomSkin skin = new CustomSkin(file);
+                if (!skinMaps.ContainsKey(skin.CharacterName)) skinMaps.Add(skin.CharacterName, new List<CustomSkin>() { new CustomSkin("") });
 
-                Console.WriteLine(new DirectoryInfo(skinFolder).Name);
-                string[] supportedFileTypes = { ".png", ".jpg" };
-
-                var files = Directory.GetFiles(skinFolder).Where(x => supportedFileTypes.Contains(Path.GetExtension(x).ToLower()));
-
-                foreach(var file in files)
-                {
-                    skins.Add(new CustomSkin(file));
-                }
-
-                skinMaps.Add(new DirectoryInfo(skinFolder).Name, skins);
+                skinMaps[skin.CharacterName].Add(skin);
+                //List<CustomSkin> skins = new List<CustomSkin>();
+                //skins.Add(new CustomSkin(""));
             }
 
             Console.WriteLine("Loaded " + skinMaps.Count + " skin(s)");

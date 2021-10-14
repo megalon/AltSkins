@@ -14,22 +14,41 @@ namespace AltSkins.Data
 
         public string CharacterName;
 
-        public Texture2D Texture;
+        public CustomSkinTexture2D[] Textures;
+
+        public CustomSkinTexture2D[] Portraits;
+
+        public SkinFormat Json;
 
         public CustomSkin(string file)
         {
-            if (file != null && file.ToLower().Contains("char"))
+            if (!String.IsNullOrEmpty(file))
             {
-                Texture = new Texture2D(2048, 2048);
-                Texture.LoadImage(File.ReadAllBytes(file));
+                var texturesAndJson = Utils.TexturesAndJSONFromPackage(file);
 
-                Name = Path.GetFileNameWithoutExtension(file);
+                Json = texturesAndJson.json;
+                Textures = texturesAndJson.textures;
+                Portraits = texturesAndJson.portraits;
 
-                CharacterName = new DirectoryInfo(file).Name;
+                Name = Json.skinName;
+
+                CharacterName = Json.characterName;
                 //skinMaps.Add(new DirectoryInfo(skinFolder).Name, tex);
             }
             else Name = "Default";
             //skinMaps.Add()
+        }
+    }
+
+    public class CustomSkinTexture2D
+    {
+        public Texture2D Texture2D;
+        public string Name;
+
+        public CustomSkinTexture2D(Texture2D texture, string name)
+        {
+            Texture2D = texture;
+            Name = name;
         }
     }
 }

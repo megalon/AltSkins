@@ -43,8 +43,14 @@
     <Reference Include="MonoMod.Utils">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\BepInEx\core\MonoMod.Utils.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\BepInEx\core\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,8 +92,11 @@
     <Compile Include="AltSkinsPlugin.cs" />
     <Compile Include="Data\CustomSkin.cs" />
     <Compile Include="Data\PlayerSlotSkinData.cs" />
+    <Compile Include="Data\SkinFormat.cs" />
     <Compile Include="HarmonyPatches\AltSkinsPatches.cs" />
     <Compile Include="HarmonyPatches\Patches\GameInstancePatch.cs" />
+    <Compile Include="HarmonyPatches\Patches\IngameUIPatch.cs" />
+    <Compile Include="HarmonyPatches\Patches\MenuUIPatch.cs" />
     <Compile Include="HarmonyPatches\Patches\SlotStatePatch.cs" />
     <Compile Include="HarmonyPatches\Patches\UpdatePatch.cs" />
     <Compile Include="HSBColor.cs" />
