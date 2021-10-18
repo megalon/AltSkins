@@ -20,10 +20,6 @@ namespace AltSkins.HarmonyPatches.Patches
             if (screen == "loading" || screen == "onlinematchwait")
             {
                 WaitingForUpdate = true;
-                // gaming?
-                //UITestingNew.UITesting.AwaitScreenState(___screenStack.Last());
-                //UITestingNew.UITesting.modifier.PassScreenState(___screenStack.Last());
-                //Console.WriteLine(GameObject.Find(screen).layer);
             }
         }
     }
@@ -65,15 +61,6 @@ namespace AltSkins.HarmonyPatches.Patches
                                         newImage.gameObject.SetActive(true);
                                     }
                                 }
-                                /*var skin = skinMap.Value.ToArray()[skinIndex];
-                                if (skin.Portraits.Any(e => e.Name == "portrait_medium"))
-                                {
-                                    Console.WriteLine("portrait");
-                                    newImage.gameObject.GetComponent<Image>().sprite = Sprite.Create(skin.Portraits.Where(e => e.Name == "portrait_medium").First().Texture2D, image.sprite.rect, image.sprite.pivot);
-                                    image.gameObject.SetActive(false);
-                                    newImage.gameObject.SetActive(true);
-                                }*/
-                                // switchy
                             }
                         }
                     }

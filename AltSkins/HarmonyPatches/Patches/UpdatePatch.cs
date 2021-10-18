@@ -39,7 +39,7 @@ namespace AltSkins.HarmonyPatches.Patches
                             if (skinMap.Key != null && skinMap.Value.ToArray()[skinIndex] != null)
                             {
                                 var customSkin = skinMap.Value.ToArray()[skinIndex];
-                                Console.WriteLine($"Applying {customSkin.Name} to player {___updagents[i].playerIndex}'s {customSkin.CharacterName}");
+                                AltSkinsPlugin.LogInfo($"Applying {customSkin.Name} to player {___updagents[i].playerIndex}'s {customSkin.CharacterName}");
 
                                 foreach (var customSkinTexture in customSkin.Textures)
                                 {
@@ -125,7 +125,7 @@ namespace AltSkins.HarmonyPatches.Patches
                                 }
                                 catch (Exception e)
                                 {
-                                    Console.WriteLine(e);
+                                    AltSkinsPlugin.LogError(e.ToString());
                                 }
                             }
                         }

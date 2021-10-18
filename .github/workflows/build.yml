@@ -1,0 +1,49 @@
+name: .NET Build
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup msbuild
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Install dependencies
+      run: msbuild -t:restore
+    - name: Build project
+      run: msbuild "AltSkins/AltSkins.csproj" /t:Build /p:Configuration=Release
+    - name: Prepare release files
+      shell: bash
+      run: |
+        find "AltSkins/bin/Release/" -type f ! -name "AltSkins.dll" -delete
+        cp "LICENSE" "AltSkins/bin/Release/LICENSE.AltSkins.txt"
+        cp "README.md" "AltSkins/bin/Release/README.md"
+        cp -a "AltSkins/Resources/." "AltSkins/bin/Release/"
+    - name: Extract Release Version
+      if: startsWith(github.ref, 'refs/tags/')
+      id: get_version
+      shell: bash
+      run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
+    - name: Prepare zip
+      run: 7z a -tzip AltSkins-${{ steps.get_version.outputs.version }}.zip "./AltSkins/bin/Release/*"
+    - name: Upload Build
+      if: startsWith(github.ref, 'refs/tags/') == false
+      uses: actions/upload-artifact@v2
+      with:
+        name: AltSkins-${{ github.sha }}
+        path: AltSkins-${{ steps.get_version.outputs.version }}.zip
+    - name: Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        name: AltSkins v${{ steps.get_version.outputs.version }}
+        files: |
+          AltSkins-${{ steps.get_version.outputs.version }}.zip
+          AltSkins/bin/Release/AltSkins.dll

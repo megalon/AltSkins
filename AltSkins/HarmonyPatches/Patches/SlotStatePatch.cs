@@ -18,25 +18,10 @@ namespace AltSkins.HarmonyPatches.Patches
     [HarmonyPatch(typeof(PlayerSlotContainer), "Clear")]
     class SlotStatePatch
     {
-        /*static bool Prefix(PlayerSlotContainer.State state, CursorMovement clicker, ref PlayerSlotContainer ___playerSlot)
-        {
-            Console.WriteLine(state);
-            Console.WriteLine(___playerSlot.state);
-            if(___playerSlot.state == PlayerSlotContainer.State.PlayerSlot && state == PlayerSlotContainer.State.NoneSlot)
-            {
-                // change the funny skin
-                ___playerSlot.SetSkin(3);
-                return false;
-            }
-            return true;
-        }*/
         static void Postfix(ref ButtonImage ___skinsButtonImage, ref PlayerSlotContainer __instance)
         {
-            //Console.WriteLine(mode);
             if (___skinsButtonImage.transform.parent.gameObject.activeSelf) ___skinsButtonImage.transform.parent.gameObject.SetActive(false);
             SlotStatePatchSelectCharacter.GetSkinName(__instance).gameObject.SetActive(false);
-
-            //if (___skinsButtonImage.transform.parent.gameObject.activeSelf) ___skinsButtonImage.transform.parent.gameObject.SetActive(true);
         }
     }
 
@@ -62,14 +47,12 @@ namespace AltSkins.HarmonyPatches.Patches
             {
                 __instance.gameObject.AddComponent<PlayerSlotSkinData>();
                 skinname = UnityEngine.Object.Instantiate(slotName, slotName.parent);
-                //skinname.parent = __instance.gameObject.transform.Find("SlotName").parent;
                 skinname.name = "SkinName";
                 var rect = skinname.GetComponent<RectTransform>();
                 rect.offsetMin = new Vector2(rect.offsetMin.x, 0);
 
                 skinname.transform.Find("ReadyImage").gameObject.SetActive(false);
 
-                //skinname.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("pog");
                 float thickness = 5f;
                 dupeText(skinname.GetChild(0).gameObject, new Vector2(0, thickness));
                 dupeText(skinname.GetChild(0).gameObject, new Vector2(0, -thickness));
@@ -102,8 +85,6 @@ namespace AltSkins.HarmonyPatches.Patches
 
         static void Postfix(ref ButtonImage ___skinsButtonImage, ref PlayerSlotContainer __instance, ref RenderVisualizer ___characterRenderVisualizer)
         {
-            Console.WriteLine(___skinsButtonImage.transform.parent.gameObject.name);
-            //Console.WriteLine(mode);
             if (!___skinsButtonImage.transform.parent.gameObject.activeSelf) ___skinsButtonImage.transform.parent.gameObject.SetActive(true);
             GetSkinName(__instance).gameObject.SetActive(true);
             __instance.GetComponent<PlayerSlotSkinData>().skinIndex = 0;
@@ -155,7 +136,6 @@ namespace AltSkins.HarmonyPatches.Patches
                         {
                             if (skin.Portraits.Any(e => e.Name == "portrait_medium"))
                             {
-                                Console.WriteLine("portrait");
                                 newImage.gameObject.GetComponent<Image>().sprite = Sprite.Create(skin.Portraits.Where(e => e.Name == "portrait_medium").First().Texture2D, image.sprite.rect, image.sprite.pivot);
                                 image.gameObject.SetActive(false);
                                 newImage.gameObject.SetActive(true);
@@ -163,33 +143,10 @@ namespace AltSkins.HarmonyPatches.Patches
                         }
                     }catch(Exception e)
                     {
-                        Console.WriteLine(e);
-                        Console.WriteLine(e.StackTrace);
+                        AltSkinsPlugin.LogError(e.ToString());
                     }
-                    //___characterRenderVisualizer.transform.Find()
-
-                    }
-                    /*string[] listOfNames = new string[] { "Default", "Blue", "Cool Alt Skin", "Red", "MLG Gamer Edition" };
-
-                    var skinName = SlotStatePatchSelectCharacter.GetSkinName(__instance);
-
-                    var skinIndex = __instance.GetComponent<PlayerSlotSkinData>().skinIndex;
-
-                    if (skinIndex == -1 || skinIndex + 1 == listOfNames.Length) skinIndex = 0;
-                    else skinIndex = skinIndex + 1;
-
-                    Console.WriteLine("OH NO");
-
-                    foreach (var text in skinName.GetComponentsInChildren<TextMeshProUGUI>()) text.SetText(listOfNames[skinIndex]);
-
-                    __instance.GetComponent<PlayerSlotSkinData>().skinIndex = skinIndex;*/
-
-                    // skin press
                 }
-            /*if (__instance.playerCursor.menuInput.IsButtonPress(MenuAction.ActionButton.Opt0)) Console.WriteLine("opt0");
-            if (__instance.playerCursor.menuInput.IsButtonPress(MenuAction.ActionButton.Opt1)) Console.WriteLine("opt1");
-            if (__instance.playerCursor.menuInput.IsButtonPress(MenuAction.ActionButton.Opt2)) Console.WriteLine("opt2");
-            if () Console.WriteLine("opt3");*/
+            }
         }
     }
 }

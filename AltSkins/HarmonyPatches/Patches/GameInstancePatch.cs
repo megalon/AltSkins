@@ -15,18 +15,7 @@ namespace AltSkins.HarmonyPatches.Patches
     {
         static void Postfix()
         {
-            Console.WriteLine("Init Prepare instance");
             AltSkinsPlugin.WaitingForUpdate = true;
-
-            //Console.WriteLine(screen);
-            /*if (screen == "mainmenu")
-            {
-                MenuModifier.WaitingForUpdate = true;
-                // gaming?
-                //UITestingNew.UITesting.AwaitScreenState(___screenStack.Last());
-                //UITestingNew.UITesting.modifier.PassScreenState(___screenStack.Last());
-                //Console.WriteLine(GameObject.Find(screen).layer);
-            }*/
         }
     }
 
@@ -35,18 +24,7 @@ namespace AltSkins.HarmonyPatches.Patches
     {
         static void Postfix()
         {
-            Console.WriteLine("Init Prepare instance");
             AltSkinsPlugin.WaitingForUpdate = true;
-
-            //Console.WriteLine(screen);
-            /*if (screen == "mainmenu")
-            {
-                MenuModifier.WaitingForUpdate = true;
-                // gaming?
-                //UITestingNew.UITesting.AwaitScreenState(___screenStack.Last());
-                //UITestingNew.UITesting.modifier.PassScreenState(___screenStack.Last());
-                //Console.WriteLine(GameObject.Find(screen).layer);
-            }*/
         }
     }
 }
