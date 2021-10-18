@@ -23,7 +23,7 @@ jobs:
         find "AltSkins/bin/Release/" -type f ! -name "AltSkins.dll" -delete
         cp "LICENSE" "AltSkins/bin/Release/LICENSE.AltSkins.txt"
         cp "README.md" "AltSkins/bin/Release/README.md"
-        cp -a "AltSkins/Resources/." "AltSkins/bin/Release/"
+        cp -a "/lib/." "AltSkins/bin/Release/"
     - name: Extract Release Version
       if: startsWith(github.ref, 'refs/tags/')
       id: get_version
