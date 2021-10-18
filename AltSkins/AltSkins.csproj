@@ -33,20 +33,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>..\lib\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\Nickelodeon All-Star Brawl_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\BepInEx\core\BepInEx.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.Utils">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\BepInEx\core\MonoMod.Utils.dll</HintPath>
+      <HintPath>..\lib\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\BepInEx\core\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,33 +57,33 @@
     <Reference Include="System.Xml" />
     <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\Nickelodeon All-Star Brawl_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>..\lib\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\Nickelodeon All-Star Brawl_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\lib\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\Nickelodeon All-Star Brawl_Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
+      <HintPath>..\lib\UnityEngine.AnimationModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\Nickelodeon All-Star Brawl_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\lib\nityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\Nickelodeon All-Star Brawl_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>..\lib\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\Nickelodeon All-Star Brawl_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\lib\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\Nickelodeon All-Star Brawl_Data\Managed\UnityEngine.UIElementsModule.dll</HintPath>
+      <HintPath>..\lib\UnityEngine.UIElementsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\Nickelodeon All-Star Brawl_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>..\lib\UnityEngine.UIModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
