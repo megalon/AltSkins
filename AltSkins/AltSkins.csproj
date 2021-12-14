@@ -32,11 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="AltSkins.csproj.user" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>..\lib\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\Nickelodeon All-Star Brawl_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>$(GameDir)\Nickelodeon All-Star Brawl_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
       <HintPath>..\lib\BepInEx.dll</HintPath>
@@ -104,7 +107,8 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\Nickelodeon All-Star Brawl\BepInEx\plugins\Bobbie-AltSkins\"</PostBuildEvent>
-  </PropertyGroup>
+  
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(ProjectDir)$(OutDir)$(TargetFileName)&quot; &quot;$(GameDir)\BepInEx\plugins&quot; /Y" />
+  </Target>
 </Project>
