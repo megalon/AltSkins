@@ -24,6 +24,9 @@ namespace AltSkins.HarmonyPatches.Patches
         }
     }
 
+    //
+    // Handles the VS screen
+    //
     [HarmonyPatch(typeof(MenuSystem), "Update")]
     class MenuUIPatchUpdate
     {

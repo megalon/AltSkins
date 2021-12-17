@@ -39,6 +39,9 @@ namespace AltSkins.HarmonyPatches.Patches
             return newText;
         }
 
+        // 
+        // Create the text objects for the skin name
+        // 
         public static Transform GetSkinName(PlayerSlotContainer __instance)
         {
             var slotName = __instance.gameObject.transform.Find("SlotName");
@@ -94,6 +97,9 @@ namespace AltSkins.HarmonyPatches.Patches
         }
     }
 
+    // 
+    // Handle switching skins in the character select
+    //
     [HarmonyPatch(typeof(PlayerSlotContainer), "Update")]
     class SlotStatePatch2
     {
