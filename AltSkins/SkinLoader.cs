@@ -7,6 +7,7 @@ using System.IO;
 using BepInEx;
 using UnityEngine;
 using AltSkins.Data;
+using Nick;
 
 namespace AltSkins
 {
@@ -18,6 +19,8 @@ namespace AltSkins
 
         public static void LoadSkins()
         {
+            var gameMeta = Resources.FindObjectsOfTypeAll<GameMetaData>().FirstOrDefault();
+
             if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
             string[] files = Directory.GetFiles(folder, "*.nasbskin", SearchOption.AllDirectories);
 
@@ -28,11 +31,71 @@ namespace AltSkins
                 try
                 {
                     AltSkinsPlugin.LogInfo($"Loading skin: {loggedName}");
-                    CustomSkin skin = new CustomSkin(file);
-                    if (!skinMaps.ContainsKey(skin.CharacterName)) skinMaps.Add(skin.CharacterName, new List<CustomSkin>() { new CustomSkin("") });
+                    CustomSkin customSkin = new CustomSkin(file);
 
-                    skinMaps[skin.CharacterName].Add(skin);
-                    AltSkinsPlugin.LogInfo($"Succesfully loaded {skin.Name} skin for {skin.CharacterName}.");
+                    CharacterMetaData charMeta = gameMeta.characterMetas.FirstOrDefault(x => x.id.Equals(customSkin.CharacterName));
+
+                    if (charMeta == null)
+                    {
+                        AltSkinsPlugin.LogError($"Could not find character \"{customSkin.CharacterName}\" for skin \"{customSkin.Name}\"");
+                        continue;
+                    }
+
+                    if (!skinMaps.ContainsKey(customSkin.CharacterName)) skinMaps.Add(customSkin.CharacterName, new List<CustomSkin>() { new CustomSkin("") });
+                    skinMaps[customSkin.CharacterName].Add(customSkin);
+
+                    string skinId = $"CUSTOM_{customSkin.CharacterName}_{customSkin.Name}";
+
+                    #region CharMetaData
+                    CharacterMetaData.CharacterSkinMetaData skinMetaData = new CharacterMetaData.CharacterSkinMetaData()
+                    {
+                        id = skinId,
+                        locNames = new string[]
+                        {
+                            customSkin.CharacterName
+                        },
+                        resPortraits = new string[]
+                        {
+                            // Maybe use some custom identifier then intercept that when loading the image?
+                            string.Empty
+                        },
+                        resMediumPortraits = new string[]
+                        {
+                            string.Empty
+                        },
+                        resMiniPortraits = new string[]
+                        {
+                            string.Empty
+                        },
+                        unlockSkin = string.Empty,
+                        unlockedByUnlockIds = new string[]
+                        {
+                            string.Empty
+                        }
+                    };
+
+                    CharacterMetaData.CharacterSkinMetaData[] skins = new CharacterMetaData.CharacterSkinMetaData[charMeta.skins.Length + 1];
+                    charMeta.skins.CopyTo(skins, 0);
+                    skins[skins.Length - 1] = skinMetaData;
+                    charMeta.skins = skins;
+                    #endregion CharMetaData
+
+
+                    #region LoadedSkin
+                    LoadedSkin loadedSkin = new LoadedSkin();
+
+                    ScriptableObject skinDataSO = ScriptableObject.CreateInstance("SkinData");
+                    SkinData skinData = (SkinData)skinDataSO;
+                    skinData.skinid = skinId;
+
+                    // Populate the SkinData here I guess
+
+                    loadedSkin.skinId = skinId;
+                    loadedSkin.skin = skinData;
+                    #endregion LoadedSkin
+
+
+                    AltSkinsPlugin.LogInfo($"Succesfully loaded {customSkin.Name} skin for {customSkin.CharacterName}.");
                     loadedSkinCount++;
                 }
                 catch (Exception e)
@@ -43,13 +106,19 @@ namespace AltSkins
                 //List<CustomSkin> skins = new List<CustomSkin>();
                 //skins.Add(new CustomSkin(""));
             }
-            AltSkinsPlugin.LogInfo($"Loaded {loadedSkinCount} skin{(loadedSkinCount == 1 ? "": "s")} for {skinMaps.Count} character{(skinMaps.Count == 1 ? "" : "s")}");
-            /*string[] supportedFileTypes = { ".png", ".jpg" };
-            var file = Directory.GetFiles(folder).Where(x => supportedFileTypes.Contains(Path.GetExtension(x).ToLower())).First();
+            AltSkinsPlugin.LogInfo($"Loaded {loadedSkinCount} skin{(loadedSkinCount == 1 ? "" : "s")} for {skinMaps.Count} character{(skinMaps.Count == 1 ? "" : "s")}");
 
-            Texture2D tex = new Texture2D(2048, 2048);
-            tex.LoadImage(File.ReadAllBytes(Path.Combine(Paths.BepInExRootPath, "plugins", "AltSkins", "Mascot_Albedo.png")));
-            textureCache = tex;*/
+
+            // Test loaded skins
+            /*
+            LoadedSkin tempLoadedSkin = new LoadedSkin();
+            Dictionary<string, LoadedSkin> loadedSkins = tempLoadedSkin.GetFieldValue<Dictionary<string, LoadedSkin>>("loadedSkins");
+
+            foreach (string key in loadedSkins.Keys)
+            {
+                AltSkinsPlugin.LogInfo(key);
+            }
+            */
         }
     }
 }
